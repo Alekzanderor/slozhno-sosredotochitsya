@@ -463,6 +463,7 @@ p.title-decor {
   inline-size: 70px;
   block-size: 25px;
   cursor: pointer;
+  transition:1s;
 }
 
 .header__theme-menu-button_active {
@@ -490,6 +491,7 @@ p.title-decor {
 .anchor {
   text-shadow: 2px 2px 0 var(--anchor-shadow-color);
   text-decoration: none;
+  transition: 1s;
 }
 
 .anchor:hover {
