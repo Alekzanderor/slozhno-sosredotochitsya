@@ -3,18 +3,14 @@
 
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает 
-  скрипт. */  
-  inline-size: 100vi;
-  block-size:100%;
+  скрипт. */
+
+  block-size: 100%;
   background-image: var(--background-image);
   background-attachment: fixed;
   background-position: center;
-  background-size:cover;  
-  font-family: IBM Plex Mono, Arial, Helvetica, sans-serif;  
-}
-
-.page:has(.theme-light) {
-  background-image: url(../images/cover-image-light.png);
+  background-size: cover;
+  font-family: "IBM Plex Mono", Courier, monospace;
 }
 
 button {
@@ -23,25 +19,40 @@ button {
   border: none;
 }
 
-main,header,footer {padding: 0 10px;}
-
-.statement {
-  display: grid;
-  gap: 0 20px;
-  margin-block-start: clamp(50px, calc(50px + calc(7.4vb - 50px)*4.5), 80px);
-  margin-block-start: 30px; /*???????????*/
-  margin-block-start: clamp(50px, calc(50px + calc(7.4vb - 50px)*4.5), 60px);
+main,
+header,
+footer {
+  padding: 0 10px;
 }
 
-.statement:first-of-type {
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.statement__margin-top {
+  margin-block-start: clamp(50px, calc(50px + calc(7.4vb - 50px) * 4.5), 80px);
+}
+
+.statement-why {
   margin-block-start: clamp(40px, calc(20vb - 93.6px), 60px);
 }
 
+.statement-pictures .list {
+  gap: 0;
+}
+
 .answer {
-  display: grid;
-  gap: 10px; 
-  grid-auto-rows: min-content;
-  margin-block-end: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.answer__text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 img {
@@ -51,23 +62,25 @@ img {
   object-position: center;
 }
 
-header, footer {
+header,
+footer {
+  block-size: 100vb;
+  min-block-size: 668px;
   position: relative;
   display: grid;
-  min-block-size: 668px;
-  grid-template-rows: 1fr 1fr 1fr;  
+  grid-template-rows: 1fr min-content 1fr;
 }
 
 footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-block-start: 20px;
 }
 
 .rec {
   display: var(--display-rec);
-  color: #fd24af;
+  color: var(--background-color-decor);
+
   position: absolute;
   inset-inline-end: 38px;
   inset-block-start: 10px;
@@ -75,25 +88,25 @@ footer {
   font-weight: 400;
   line-height: 25px;
   text-align: center;
-  text-transform: uppercase
-    
+  text-transform: uppercase;
 }
 
 .rec::after {
   content: "";
-  
+
   inset-block-start: 8px;
   inset-inline-end: -20px;
-  background-color: #FF0070;
+  background-color: #ff0070;
   border-radius: 50%;
   inline-size: 9px;
   block-size: 9px;
-  box-shadow: 0px 0px 4px 2px #FF0070;
+  box-shadow: 0px 0px 4px 2px #ff0070;
   position: absolute;
 }
 
-h1, h4 {
-  font-size: clamp(7.25rem, 7.0115rem + 1.0178vi, 7.5rem);/*116px;*/
+h1,
+h5 {
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vi, 7.5rem); /*116px;*/
   font-weight: 700;
   line-height: 95.7px;
   text-align: left;
@@ -101,34 +114,36 @@ h1, h4 {
   text-shadow: 4px 4px 0 var(--accent-color);
 
   color: var(--h1-text-color);
+}
 
+h5 {
+  margin-block-start: 90px;
 }
 
 h1 {
   align-self: center;
 }
 
-h1::before, h4::before  {
-  content:"";
+.decorated-zone::before {
+  content: "";
   display: block;
   width: 25px;
-  height: 25px;;
-  border: none; 
+  height: 25px;
+  border: none;
   border-block-end: 1px solid var(--h2-text-color);
-  border-inline-start: 1px solid var(--h2-text-color); 
+  border-inline-start: 1px solid var(--h2-text-color);
 
   position: absolute;
   inset-inline-start: 8px;
   inset-block-end: 8px;
-  
 }
 
-h1::after, h4::after  {
-  content:"";
+.decorated-zone::after {
+  content: "";
   display: block;
   width: 25px;
-  height: 25px;;
-  border: none; 
+  height: 25px;
+  border: none;
   border-block-start: 1px solid var(--h2-text-color);
   border-inline-end: 1px solid var(--h2-text-color);
 
@@ -137,70 +152,63 @@ h1::after, h4::after  {
   inset-block-start: 8px;
 }
 
+footer.decorated-zone::after {
+  inset-block-start: 50px;
+}
+
 .header__theme-menu {
   font-size: 18px;
   font-weight: 400;
   line-height: 18px;
   text-align: center;
-  
-  color: var(--h2-text-color);  
+
+  color: var(--h2-text-color);
 }
 
 .header__theme-menu-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;  
-  gap: 13px;
-  margin-block-start: 76.5px;
-  margin-inline-end: 11px;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 11px;
+  block-size: 100%;
 }
 
-h2, h3   {
+h2,
+h3,
+h4 {
   font-size: 18px;
   font-weight: 700;
   line-height: 23.4px;
   text-align: left;
   color: var(--h2-text-color);
-  
 }
 
-h2 {
-  margin-block-end: 20px;
-}
-
-h2.title-pictures {
-  margin-block-end: 10px;
-}
-
-h3 {
-  color: var(--h3-text-color);  
-}
-
-h2 + h3 {
-  margin-block-end: 20px;
+h3,
+h4 {
+  color: var(--h3-text-color);
 }
 
 p {
   font-size: 18px;
   font-weight: 400;
   line-height: 23.4px;
-  text-align: left;  
+  text-align: left;
   color: var(--main-text-color);
 }
 
 .title {
   align-self: center;
-  margin-block-start: -25px;
+  justify-self: center;
+  margin-block-start: -10px;
 }
 
 p.title-decor {
-  color: var(--h3-text-color);  
+  color: var(--h3-text-color);
   font-weight: 700;
   inline-size: 355px;
   block-size: 117px;
 }
-
-
 
 .title-decor {
   background-color: var(--background-color-decor);
@@ -212,7 +220,7 @@ p.title-decor {
 
 .title-pictures {
   color: var(--h3-text-color);
-  margin-block-end: clamp(10px, calc(10px + (5.8vb - 10px) * 4.5), 20px);
+  margin-block-end: clamp(10px, calc((2vb - 12px) * 6), 20px);
 }
 
 .textMenu {
@@ -222,21 +230,20 @@ p.title-decor {
   text-align: center;
 }
 
-.textDecorative { 
+.textDecorative {
   font-size: 18px;
   font-weight: 400;
   line-height: 25px;
   text-align: center;
-
 }
 
-@media (768px <= width < 1024px) {
+@media (768px <= width) {
   .title {
     justify-self: flex-end;
   }
 
   .rec {
-    margin-inline-end: 8px;
+    margin-inline-end: 9px;
     margin-block-start: 10px;
   }
 
@@ -244,96 +251,74 @@ p.title-decor {
     inset-inline-end: -18px;
   }
 
-  h1::before, h4::before  {
-    inset-inline-start: 22px;
+  .decorated-zone::before {
+    inset-inline-start: 20px;
     inset-block-end: 20px;
-    
   }
-  
-  h1::after, h4::after  {
-    inset-inline-end: 18px;
+
+  .decorated-zone::after {
+    inset-inline-end: 20px;
     inset-block-start: 20px;
+  }
+
+  footer.decorated-zone::after {
+    inset-block-start: 35px;
   }
 
   p.title-decor {
     inline-size: 364px;
-    block-size: 117px;       
+    block-size: 117px;
   }
-  
+
   main {
     display: grid;
   }
 
-  main,footer {
+  main,
+  footer {
     padding: 0 20px;
-  }
-
-  header, footer {
-    min-block-size: 1024px;
   }
 
   header {
     padding: 0 20px 0px 0;
   }
 
-  .header__theme-menu { 
-    align-self: center;
-    margin-block-start: 30px;
-    margin-inline-end: -7px;
-  }
-
-  .header__theme-menu-list {    
-    margin-block-start: 113px;
-    margin-inline-end: 12px;
-  }
-
   footer {
     margin-block-start: 40px;
   }
 
-  .title {  
-    align-self: center;
-    margin-block-start: -140px;
+  .title {
+    margin-block-start: -18px;
   }
 
-  .statement {
-    grid-template-columns: 1fr 2.2fr;
-    grid-template-columns: 230px 2.2fr;
-    grid-template-rows: repeat(10, min-content);
-    gap: 0 30px;
-     
+  .statement-why,
+  .statement-advice {
+    flex-direction: row;
   }
 
-  .statement__horizontal, .statement__pictures{
-    grid-template-columns: none;
+  .statement-why h2,
+  .statement-advice h2 {
+    inline-size: 236px;
   }
 
-  .statement__horizontal h2 {
+  .statement-causes h2 {
     inline-size: 120px;
   }
-  .statement__pictures h2 {
-    inline-size: 100%; 
-    margin-block-end: 20px;  
-  }
 
-  h1, h4 {
+  h1,
+  h5 {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
 
-  h1 {
-    align-self: center;    
-  }
-
-  h2 {
-    grid-row-start: 1;
-    grid-row-end: 10;
-    
+  h5 {
+    margin-block-start: 45px;
   }
 
   .answer__pictures {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 192px;    
-    gap:20px;
+    grid-template-rows: 192px;
+    gap: 20px;
   }
 
   .sunset {
@@ -346,7 +331,7 @@ p.title-decor {
 
   .tape {
     grid-row: span 2;
-  }  
+  }
 
   .street {
     grid-column: span 2;
@@ -354,90 +339,92 @@ p.title-decor {
 }
 
 @media (1024px <= width) {
-
   .rec {
-    margin-inline-end: 11px;
+    margin-inline-end: 10px;
     margin-block-start: 10px;
   }
 
   .rec::after {
-    inset-inline-end: -18px;
+    inset-inline-end: -20px;
   }
 
-  h1::before, h4::before  {
-    inset-inline-start: 22px;
+  .decorated-zone::before {
+    inset-inline-start: 20px;
     inset-block-end: 20px;
-    
   }
-  
-  h1::after, h4::after  {
+
+  .decorated-zone::after {
     inset-inline-end: 20px;
     inset-block-start: 20px;
   }
 
-  .header__theme-menu-list {    
+  .header__theme-menu-list {
     flex-direction: row;
-    justify-content: center;   
-    align-items: center;
-    gap: 21px;
-    margin-block-start: 15px;
-    margin-inline-start: 15px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-block-start: 20px;
   }
 
   .title {
-    justify-self: flex-end;
-    align-self: flex-end;
-    padding-block-end: 135px;
+    margin-block-start: 0px;
   }
 
-  p.title-decor {    
+  p.title-decor {
     inline-size: 491px;
     block-size: 71px;
   }
-  
+
   main {
     display: grid;
   }
 
-  main,header,footer {
+  main,
+  header,
+  footer {
     padding: 0 20px;
   }
 
-  header, footer {
+  header,
+  footer {
     min-block-size: 768px;
   }
 
   footer {
-    margin-block-start: 40px;
+    margin-block-start: 40px; /*123123 12312312312312*/
   }
 
   .statement {
     grid-template-columns: 1fr 2.03fr;
     grid-template-rows: repeat(10, min-content);
-    gap:0 15px;
+    gap: 0 15px;
   }
 
   .statement__horizontal {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap:0 20px;
+    gap: 0 20px;
   }
 
   .statement__pictures {
     grid-template-columns: none;
   }
 
-  .statement__horizontal h2 {
+  .statement-why h2,
+  .statement-advice h2,
+  .statement-causes h2 {
     inline-size: 315px;
-    grid-column: span 3;
   }
 
-  .statement__pictures h2 {
-    inline-size: 100%;  
-    margin-block-end: 20px;  
+  .statement-causes .list {
+    flex-direction: row;    
   }
 
-  h1, h4 {
+  .statement-causes .answer {
+    min-inline-size: 315px;;
+  }
+
+  h1,
+  h5 {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
 
@@ -452,14 +439,7 @@ p.title-decor {
   }
 
   .answer__pictures {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr) ;    
-  }
-
-  .answer__pictures {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 260px;    
-    gap:20px;
+    grid-template-rows: 260px;
   }
 
   .sunset {
@@ -472,7 +452,7 @@ p.title-decor {
 
   .tape {
     grid-row: span 2;
-  }  
+  }
 
   .street {
     grid-column: span 2;
@@ -482,7 +462,7 @@ p.title-decor {
 .header__theme-menu-button {
   inline-size: 70px;
   block-size: 25px;
-  margin: 5px -5px;
+  cursor: pointer;
 }
 
 .header__theme-menu-button_active {
@@ -490,15 +470,14 @@ p.title-decor {
   outline: 1px solid currentColor;
   inline-size: 70px;
   block-size: 25px;
-  margin: 5px -5px;
 }
 
 .header__theme-menu-button:hover {
-  outline: 1px solid var(--border-color-transparent);  
+  outline: 1px solid var(--border-color-transparent);
 }
 
 .header__theme-menu-button:focus {
-  outline:none;
+  outline: none;
 }
 
 .header__theme-menu-button:focus-visible {
@@ -508,60 +487,19 @@ p.title-decor {
   border-block-end: 1px solid currentColor;
 }
 
-a {
-  text-shadow: 2px 2px 0 var(--accent-color);  
+.anchor {
+  text-shadow: 2px 2px 0 var(--anchor-shadow-color);
+  text-decoration: none;
 }
 
-a:hover {
-  /*border-block-end: 1px solid currentColor;*/
+.anchor:hover {
   text-decoration: underline;
 }
 
-a:focus {
+.anchor:focus {
   outline: none;
 }
 
-a:focus-visible {
+.anchor:focus-visible {
   border: 1px solid currentColor;
 }
-
-.theme_light {
-  --accent-color:#FF0070;
-  --h1-text-color: #FFC2E6;
-  --h2-text-color:#353430;
-  --h3-text-color:#353430;
-  --main-text-color: #353430;
-  --main-background-color: #fff;
-  --background-color-decor: #FF8DCB;
-  --border-color-transparent:  rgba(50, 49, 45, 0.5);
-  --background-image: url(../images/cover-image-light.png);
-  --display-rec: none;
-}
-
-.theme_dark {
-  --accent-color:#FF0070;
-  --h1-text-color:#DB00FF;
-  --h2-text-color:#FF0070;
-  --h3-text-color:#000028;
-  --main-text-color: #F1B2CE;
-  --main-background-color: #fff;
-  --background-color-decor: #FF0070;
-  --border-color-transparent: rgba(255, 0, 112, 0.5);
-  --background-image: url(../images/cover-image-dark.png);
-  --display-rec: block;
-}
-
-.theme-auto {       
-  --accent-color:#FF0070;
-  --h1-text-color: #FFC2E6;  
-  --h2-text-color:#353430;
-  --h3-text-color:#353430;
-  --main-text-color: #353430;
-  --main-background-color: #fff;
-  --background-color-decor: #FF8DCB;
-  --border-color-transparent: rgba(50, 49, 45, 0.5);
-  --background-image: url(../images/cover-image-light.png);
-  --display-rec: none;  
-  }
-  
-
