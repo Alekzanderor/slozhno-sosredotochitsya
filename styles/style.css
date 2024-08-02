@@ -4,7 +4,7 @@
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает 
   скрипт. */
-
+  max-inline-size: 100%;
   block-size: 100%;
   background-image: var(--background-image);
   background-attachment: fixed;
@@ -75,6 +75,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-block-start: 40px;
 }
 
 .rec {
@@ -104,8 +105,7 @@ footer {
   position: absolute;
 }
 
-h1,
-h5 {
+.h1 {
   font-size: clamp(7.25rem, 7.0115rem + 1.0178vi, 7.5rem); /*116px;*/
   font-weight: 700;
   line-height: 95.7px;
@@ -116,11 +116,7 @@ h5 {
   color: var(--h1-text-color);
 }
 
-h5 {
-  margin-block-start: 90px;
-}
-
-h1 {
+header .h1 {
   align-self: center;
 }
 
@@ -150,10 +146,6 @@ h1 {
   position: absolute;
   inset-inline-end: 8px;
   inset-block-start: 8px;
-}
-
-footer.decorated-zone::after {
-  inset-block-start: 50px;
 }
 
 .header__theme-menu {
@@ -238,8 +230,13 @@ p.title-decor {
 }
 
 @media (768px <= width) {
+  .header__theme-menu-list {
+    margin-block-start: 9px;
+  }
+
   .title {
     justify-self: flex-end;
+    margin-block-start: -18px;
   }
 
   .rec {
@@ -261,17 +258,9 @@ p.title-decor {
     inset-block-start: 20px;
   }
 
-  footer.decorated-zone::after {
-    inset-block-start: 35px;
-  }
-
   p.title-decor {
     inline-size: 364px;
     block-size: 117px;
-  }
-
-  main {
-    display: grid;
   }
 
   main,
@@ -284,11 +273,7 @@ p.title-decor {
   }
 
   footer {
-    margin-block-start: 40px;
-  }
-
-  .title {
-    margin-block-start: -18px;
+    margin-block-start: 60px;
   }
 
   .statement-why,
@@ -299,25 +284,20 @@ p.title-decor {
   .statement-why h2,
   .statement-advice h2 {
     inline-size: 236px;
+    flex-shrink: 0;
   }
 
   .statement-causes h2 {
     inline-size: 120px;
   }
 
-  h1,
-  h5 {
+  .h1 {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
-  }
-
-  h5 {
-    margin-block-start: 45px;
   }
 
   .answer__pictures {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 192px;
     gap: 20px;
   }
 
@@ -374,14 +354,10 @@ p.title-decor {
     block-size: 71px;
   }
 
-  main {
-    display: grid;
-  }
-
   main,
   header,
   footer {
-    padding: 0 20px;
+    padding: 0 20px 0 20px;
   }
 
   header,
@@ -389,57 +365,32 @@ p.title-decor {
     min-block-size: 768px;
   }
 
-  footer {
-    margin-block-start: 40px; /*123123 12312312312312*/
-  }
-
-  .statement {
-    grid-template-columns: 1fr 2.03fr;
-    grid-template-rows: repeat(10, min-content);
-    gap: 0 15px;
-  }
-
-  .statement__horizontal {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0 20px;
-  }
-
-  .statement__pictures {
-    grid-template-columns: none;
-  }
-
   .statement-why h2,
   .statement-advice h2,
   .statement-causes h2 {
     inline-size: 315px;
+    flex-shrink: 0;
   }
 
   .statement-causes .list {
-    flex-direction: row;    
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-inline-size: 100%;
+    gap: 20px;
   }
 
   .statement-causes .answer {
-    min-inline-size: 315px;;
+    min-inline-size: 314px;
+    max-inline-size: calc(100vi * 0.3);
   }
 
-  h1,
-  h5 {
+  .h1 {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
 
-  h1 {
-    align-self: center;
+  header .h1 {
     margin-inline-start: -20px;
-  }
-
-  h2 {
-    grid-row-start: 1;
-    grid-row-end: 10;
-  }
-
-  .answer__pictures {
-    grid-template-rows: 260px;
   }
 
   .sunset {
@@ -463,7 +414,7 @@ p.title-decor {
   inline-size: 70px;
   block-size: 25px;
   cursor: pointer;
-  transition:1s;
+  transition: 1s;
 }
 
 .header__theme-menu-button_active {
@@ -495,7 +446,7 @@ p.title-decor {
 }
 
 .anchor:hover {
-  text-decoration: underline;
+  border-block-end: 1px solid currentColor;
 }
 
 .anchor:focus {
